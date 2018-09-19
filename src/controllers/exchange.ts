@@ -4,8 +4,9 @@ import { Exchange, ModelError } from "../lib/models/models";
 import * as rp from "request-promise";
 
 export async function getExchangeHandler(req: Request, res: Response): P<any> {
+  const base = req.swagger.params.base.value;
   const options = {
-    uri: "https://api.exchangeratesapi.io/latest",
+    uri: `https://api.exchangeratesapi.io/latest?base=${base}`,
     headers: {
         "Content-Type": "application/json"
     },
@@ -14,6 +15,7 @@ export async function getExchangeHandler(req: Request, res: Response): P<any> {
 
   try {
       const body: Exchange = await rp(options);
+      console.log("AAAA:", body);
       res.json(body);
   } catch (exception) {
       res.json({ message: "Uknown Error"} as ModelError);

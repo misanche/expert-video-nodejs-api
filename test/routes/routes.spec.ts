@@ -24,7 +24,6 @@ describe("Exchange - test GET endpoint ", function () {
             .end((err: Error, res: any): void => {
                 expect(res.statusCode).to.be.equal(200);
                 expect(res.body).not.to.be.equal(undefined);
-                console.log(res);
                 expect(res.body.base).to.be.equal("EUR");
                 expect(res.body.date).to.be.equal("2018-09-07");
                 expect(res.body.rates).not.to.be.equal(undefined);

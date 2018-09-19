@@ -15,7 +15,6 @@ export async function getExchangeHandler(req: Request, res: Response): P<any> {
 
   try {
       const body: Exchange = await rp(options);
-      console.log("AAAA:", body);
       res.json(body);
   } catch (exception) {
       res.json({ message: "Uknown Error"} as ModelError);

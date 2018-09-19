@@ -11,71 +11,29 @@ consumes:
 host: 'localhost:8001'
 basePath: /api
 paths:
-  /hello:
-    post:
-      x-swagger-router-controller: helloWorldRoute
-      operationId: helloWorldPost
-      tags:
-        - /hello
-      description: Returns Hello world string via POST.
-      parameters:
-        - name: greeting
-          in: body
-          description: Name of greeting
-          required: true
-          schema:
-            $ref: '#/definitions/Greeting'
-      responses:
-        '200':
-          description: Successful request.
-          schema:
-            $ref: '#/definitions/Hello'
-        default:
-          description: Invalid request.
-          schema:
-            $ref: '#/definitions/Error'
+  /exchange/latest:
     get:
-      x-swagger-router-controller: helloWorldRoute
-      operationId: helloWorldGet
+      x-swagger-router-controller: exchangeRoute
+      operationId: exchangeGet
       tags:
-        - /hello
-      description: Returns Hello world string via GET.
+        - Exchange
+      description: Get the latest exchange rates based on currency
       parameters:
-        - name: name
+        - name: base
           in: query
-          description: Name
-          required: true
-          type: string
-        - name: surname
-          in: query
-          description: Surname
+          description: Base currency name
           required: true
           type: string
       responses:
         '200':
-          description: Successful request.
+          description: successful response
           schema:
-            $ref: '#/definitions/Hello'
+            $ref: '#/definitions/Exchange'
         default:
           description: Invalid request.
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  Hello:
-    properties:
-      msg:
-        type: string
-    required:
-      - msg
-  Greeting:
-    properties:
-      name:
-        type: string
-      surname:
-        type: string
-    required:
-      - name
-      - surname
   Exchange:
     type: object
     required:
